@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tushar Sharma - Portfolio</title>
+    <style>
+        :root {
+            --bg: #0f172a;
+            --bg-alt: #020617;
+            --sidebar: #020617;
+            --card: #020617;
+            --accent: #38bdf8;
+            --accent-soft: rgba(56, 189, 248, 0.15);
+            --accent-strong: #0ea5e9;
+            --text-main: #e5e7eb;
+            --text-muted: #9ca3af;
+            --border: #1f2937;
+            --shadow-soft: 0 18px 35px rgba(15, 23, 42, 0.70);
+            --radius-lg: 18px;
+            --radius-md: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #1e293b 0, #020617 45%, #000 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .page {
+            max-width: 1100px;
+            margin: 24px auto 32px;
+            padding: 0 14px;
+            display: grid;
+            grid-template-columns: 280px minmax(0, 1fr);
+            gap: 18px;
+        }
+
+        /* Sidebar */
+
+        .sidebar {
+            background: linear-gradient(160deg, #020617, #020617 55%, #111827);
+            border-radius: 24px;
+            padding: 18px 16px 20px;
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            box-shadow: var(--shadow-soft);
+            position: sticky;
+            top: 18px;
+            height: fit-content;
+        }
+
+        .avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 999px;
+            background: radial-gradient(circle at 30% 0, #38bdf8 0, #0ea5e9 35%, #6366f1 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            color: #020617;
+            box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.4);
+            margin-bottom: 8px;
+        }
+
+        .name {
+            font-size: 1.35rem;
+            font-weight: 600;
+        }
+
+        .role {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .mini-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 999px;
+            background: rgba(22, 163, 74, 0.18);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.7);
+            margin-bottom: 10px;
+        }
+
+        .sidebar p {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-nav {
+            margin: 14px 0 10px;
+        }
+
+        .sidebar-nav-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 5px 8px;
+            border-radius: 8px;
+            font-size: 0.86rem;
+            color: var(--text-main);
+            border: 1px solid transparent;
+        }
+
+        .sidebar-nav a:hover {
+            border-color: var(--border);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .sidebar-section {
+            margin-top: 12px;
+        }
+
+        .sidebar-section h3 {
+            font-size: 0.84rem;
+            text-transform: uppercase;
+            letter-spacing: 0.13em;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .contact-list {
+            list-style: none;
+            font-size: 0.83rem;
+        }
+
+        .contact-list li + li {
+            margin-top: 6px;
+        }
+
+        .contact-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+        }
+
+        .contact-value {
+            display: block;
+            font-size: 0.86rem;
+        }
+
+        .pill-link {
+            margin-top: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            font-size: 0.8rem;
+            color: var(--accent);
+            background: rgba(15, 23, 42, 0.9);
+        }
+
+        .pill-link:hover {
+            background: rgba(15, 23, 42, 1);
+        }
+
+        /* Main content */
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .section {
+            background: linear-gradient(160deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+            border-radius: var(--radius-lg);
+            padding: 16px 16px 14px;
+            border: 1px solid rgba(148, 163, 184, 0.32);
+            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.6);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+        }
+
+        .section-tagline {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        .section-body {
+            font-size: 0.9rem;
+            color: #e5e7eb;
+            line-height: 1.6;
+        }
+
+        .section-body p + p {
+            margin-top: 5px;
+        }
+
+        .notice {
+            margin-top: 10px;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            padding: 8px 10px;
+            border-radius: 10px;
+            background: rgba(15, 23, 42, 0.98);
+            border: 1px dashed rgba(148, 163, 184, 0.7);
+        }
+
+        /* Education */
+
+        .edu-item {
+            margin-top: 4px;
+        }
+
+        .edu-title {
+            font-size: 0.98rem;
+            font-weight: 600;
+        }
+
+        .edu-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        /* Skills */
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .skill-pill {
+            padding: 6px 9px;
+            border-radius: var(--radius-md);
+            font-size: 0.8rem;
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            background: radial-gradient(circle at 0 0, var(--accent-soft), transparent 60%);
+        }
+
+        /* Projects */
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .project-card {
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            padding: 10px 10px 8px;
+            background: radial-gradient(circle at top, rgba(30, 64, 175, 0.4), rgba(15, 23, 42, 0.98));
+        }
+
+        .project-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .project-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .project-card p {
+            font-size: 0.83rem;
+        }
+
+        /* Resume */
+
+        .resume-list {
+            list-style: none;
+            font-size: 0.86rem;
+        }
+
+        .resume-list li + li {
+            margin-top: 4px;
+        }
+
+        .resume-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 3px 7px;
+            border-radius: 999px;
+            background: var(--accent-soft);
+            color: var(--accent-strong);
+            margin-left: 4px;
+        }
+
+        .resume-btn {
+            margin-top: 8px;
+            display: inline-block;
+            font-size: 0.85rem;
+            padding: 8px 13px;
+            border-radius: 999px;
+            border: none;
+            background: linear-gradient(to right, var(--accent), var(--accent-strong));
+            color: #020617;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .resume-btn:hover {
+            filter: brightness(1.05);
+        }
+
+        .resume-note {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 5px;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 16px;
+        }
+
+        @media (max-width: 860px) {
+            .page {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .sidebar {
+                position: static;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 540px) {
+            .page {
+                margin-top: 16px;
+            }
+            .section {
+                padding: 14px 12px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="avatar">TS</div>
+        <div class="name">Tushar Sharma</div>
+        <div class="role">Software Development Student · Mohawk College</div>
+        <div class="mini-badge">GitHub Pages portfolio · Assignment</div>
+
+        <p>
+            I’m learning how to build clean, practical software with Java, C#, JavaScript, and SQL.
+            This portfolio was created as part of a course assignment using GitHub Pages.
+        </p>
+
+        <div class="sidebar-nav">
+            <div class="sidebar-nav-title">Sections</div>
+            <a href="#summary">Summarizing Statement</a>
+            <a href="#education">Education</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#resume">Resume</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>Contact</h3>
+            <ul class="contact-list">
+                <li>
+                    <span class="contact-label">Email</span>
+                    <span class="contact-value">tushar.sharma@example.com</span>
+                </li>
+                <li>
+                    <span class="contact-label">GitHub</span>
+                    <span class="contact-value">
+                        <a href="https://github.com/YOUR-GITHUB-USERNAME" target="_blank">
+                            github.com/YOUR-GITHUB-USERNAME
+                        </a>
+                    </span>
+                </li>
+                <li>
+                    <span class="contact-label">Location</span>
+                    <span class="contact-value">Hamilton, Ontario, Canada</span>
+                </li>
+            </ul>
+
+            <a class="pill-link" href="mailto:tushar.sharma@example.com">
+                 Email me about junior roles
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="content">
+
+        <!-- SUMMARY -->
+        <section class="section" id="summary">
+            <div class="section-header">
+                <h2 class="section-title">Summary</h2>
+                <div class="section-tagline">A quick intro</div>
+            </div>
+            <div class="section-body">
+                <p>
+                    Hi, I’m <strong>Tushar Sharma</strong>, a Software Development student at Mohawk College.
+                    I enjoy building small, working applications and learning how to write code that is clear
+                    and easy to understand. Most of my recent work has been with
+                    <strong>Java</strong>, <strong>C#/.NET</strong>, <strong>JavaScript</strong>, and
+                    <strong>SQL</strong>.
+                </p>
+                <p>
+                    I’m especially interested in full-stack web development and mobile apps using React Native.
+                    This website is a simple portfolio created specifically for a GitHub Pages assignment.
+                </p>
+            </div>
+        </section>
+
+        <!-- EDUCATION -->
+        <section class="section" id="education">
+            <div class="section-header">
+                <h2 class="section-title">Education</h2>
+                <div class="section-tagline">Where I’m studying</div>
+            </div>
+            <div class="section-body">
+                <div class="edu-item">
+                    <div class="edu-title">Computer Systems Technology – Software Development</div>
+                    <div class="edu-meta">Mohawk College · Hamilton, Ontario · 2023 – Present</div>
+                    <p>
+                        Courses have covered Data Structures and Algorithms (Java), Web Programming
+                        (HTML, CSS, JavaScript, PHP), C# and .NET, database design with SQL, mobile
+                        development using React Native, cloud fundamentals (Azure), and software
+                        quality and testing.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section class="section" id="skills">
+            <div class="section-header">
+                <h2 class="section-title">Skills</h2>
+                <div class="section-tagline">Technologies I’ve worked with</div>
+            </div>
+            <div class="section-body">
+                <p>
+                    These are some of the main tools and technologies I have used in coursework
+                    and practice projects:
+                </p>
+                <div class="skills-grid">
+                    <span class="skill-pill">Java · OOP · Data Structures</span>
+                    <span class="skill-pill">C# · .NET · Windows Forms</span>
+                    <span class="skill-pill">JavaScript · DOM</span>
+                    <span class="skill-pill">HTML · CSS · Layout</span>
+                    <span class="skill-pill">PHP · Server-Side Web</span>
+                    <span class="skill-pill">React Native · Expo</span>
+                    <span class="skill-pill">SQL · SQL Server</span>
+                    <span class="skill-pill">Git · GitHub</span>
+                    <span class="skill-pill">MS Project · Planning</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section class="section" id="projects">
+            <div class="section-header">
+                <h2 class="section-title">Projects</h2>
+                <div class="section-tagline">Course work & practice</div>
+            </div>
+            <div class="section-body">
+                <p style="margin-bottom:6px;">
+                    These are a mix of course assignments and practice projects. Some are still being improved.
+                </p>
+                <div class="projects-grid">
+                    <article class="project-card">
+                        <div class="project-title">Battleship Bot (Java)</div>
+                        <div class="project-meta">Java · 2D arrays · Algorithms</div>
+                        <p>
+                            Implemented a bot that plays Battleship on a 15×15 grid using a checkerboard
+                            search and “hunt mode” strategy to find and sink ships efficiently.
+                        </p>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-title">Doctor Who Database Viewer</div>
+                        <div class="project-meta">C# · Windows Forms · SQL Server</div>
+                        <p>
+                            A desktop app that loads Doctors, Companions, and Episodes from a SQL Server
+                            database and displays related information using combo boxes and list boxes.
+                        </p>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-title">Task Manager App</div>
+                        <div class="project-meta">React Native · Expo</div>
+                        <p>
+                            Simple mobile task app that lets users add and remove tasks. Built using
+                            React Native and Expo to practice basic UI components and state.
+                        </p>
+                    </article>
+
+                    <article class="project-card">
+                        <div class="project-title">Hustlers Street Dreams (Concept)</div>
+                        <div class="project-meta">HTML · CSS · Branding (concept)</div>
+                        <p>
+                            A basic landing page for a fictional streetwear hoodie brand. Used to practice
+                            layout, typography, and experimenting with simple front-end design.
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESUME -->
+        <section class="section" id="resume">
+            <div class="section-header">
+                <h2 class="section-title">Resume</h2>
+                <div class="section-tagline">Short summary + PDF link</div>
+            </div>
+            <div class="section-body">
+                <ul class="resume-list">
+                    <li>Experience with object-oriented programming in Java and C#.<span class="resume-badge">Core</span></li>
+                    <li>Built small web applications using HTML, CSS, JavaScript, and PHP.</li>
+                    <li>Worked with SQL databases and created ER diagrams for course projects.</li>
+                    <li>Used Git and GitHub to manage code for assignments and practice work.</li>
+                    <li>Focusing on writing code that is readable and well-structured.</li>
+                </ul>
+                <button class="resume-btn"
+                        onclick="alert('For this assignment, you can upload a PDF resume to GitHub and update this button to link to it.');">
+                    Download Resume (PDF)
+                </button>
+                <div class="resume-note"></div>
+            </div>
+        </section>
+
+        <!-- CONTACT (extra, even though sidebar has it) -->
+        <section class="section" id="contact">
+            <div class="section-header">
+                <h2 class="section-title">Contact Information</h2>
+                <div class="section-tagline">Let’s connect</div>
+            </div>
+            <div class="section-body">
+                <p>
+                    The easiest way to contact me is by email. I’m open to junior roles, internships,
+                    and small projects where I can keep learning and contribute.
+                </p>
+                <p style="font-size:0.88rem; color:var(--text-muted); margin-top:4px;">
+                    Email: <strong>ts123855@gmail.com</strong><br>
+                    GitHub: <a href="https://github.com/2024tusharsharma-beep" target="_blank">github.com/2024tusharsharma-beep</a>
+                </p>
+            </div>
+        </section>
+
+        <footer>
+            © <span id="year"></span> Tushar Sharma · Portfolio created using GitHub Pages for a Mohawk College assignment
+        </footer>
+
+    </main>
+</div>
+
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
